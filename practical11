@@ -1,0 +1,82 @@
+import java.io.*;
+
+class MyException extends Exception {
+    MyException(String msg) {
+        super(msg);
+    }
+}
+
+ class ExceptionHandlingP11 {
+
+    static void fileMethod() throws IOException {
+        throw new IOException("File not found error");
+    }
+
+    static void checkMarks(int marks) throws MyException {
+        if (marks < 40) {
+            throw new MyException("Fail: Marks less than 40");
+        } else {
+            System.out.println("Pass");
+        }
+    }
+
+    static void checkAge(int age) {
+        if (age < 18) {
+            throw new ArithmeticException("Not eligible for voting");
+        } else {
+            System.out.println("Eligible for voting");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            int a = 10, b = 0;
+            int c = a / b;
+            System.out.println(c);
+        } catch (ArithmeticException e) {
+            System.out.println("1. Cannot divide by zero");
+        }
+
+        try {
+            int arr[] = {1, 2, 3};
+            System.out.println(arr[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("2. Invalid array index");
+        }
+
+        try {
+            String str = null;
+            System.out.println(str.length());
+        } catch (NullPointerException e) {
+            System.out.println("3. String is null");
+        }
+
+        try {
+            int x = 10 / 2;
+            System.out.println("4. Result: " + x);
+        } catch (Exception e) {
+            System.out.println("Error");
+        } finally {
+            System.out.println("4. Finally executes");
+        }
+
+        try {
+            checkAge(16);
+        } catch (Exception e) {
+            System.out.println("5. " + e.getMessage());
+        }
+
+        try {
+            fileMethod();
+        } catch (IOException e) {
+            System.out.println("6. " + e.getMessage());
+        }
+
+        try {
+            checkMarks(35);
+        } catch (MyException e) {
+            System.out.println("7. " + e.getMessage());
+        }
+    }
+}
